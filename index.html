@@ -6,11 +6,33 @@
   <title>Auto Play Audio</title>
 </head>
 <body>
-  <h2>Your Audio is Playing...</h2>
-  
-  <audio autoplay>
+  <h2>Playing your song...</h2>
+
+  <audio id="bgmusic" autoplay muted>
     <source src="no_lie_ft_dua_lipa.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+    Your browser does not support the audio tag.
   </audio>
+
+  <button id="playBtn" style="display:none;">▶ Tap to Play</button>
+
+  <script>
+    const audio = document.getElementById("bgmusic");
+    const btn = document.getElementById("playBtn");
+
+    // Try autoplay
+    window.addEventListener("load", () => {
+      audio.muted = false;
+      audio.play().catch(() => {
+        // If blocked, show button
+        btn.style.display = "block";
+      });
+    });
+
+    // Play when user taps button
+    btn.addEventListener("click", () => {
+      audio.play();
+      btn.style.display = "none";
+    });
+  </script>
 </body>
 </html>
